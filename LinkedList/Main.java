@@ -25,11 +25,45 @@ public class Main {
         }
     }
 
+    public static int bobsLastPen(int numberOfPens, int k) {
+        
+        SinglyLinkedList list = new SinglyLinkedList(new Node(1));
+        
+        for(int i = 2; i <= numberOfPens; i++) {
+            list.add(new Node(i));
+        }
+
+        Node curNode = list.head;
+        while(curNode.next != null) {
+            curNode = curNode.next;
+        }
+        System.out.printf("%s\n", list.toString());
+
+        curNode.next = list.head; // makes linked list circular now
+
+        curNode = list.head;
+        int day = 1;
+        int pensRemoved = 0;
+        while(true) {
+            if((day + 1) % k == 0) {
+                curNode.next = curNode.next.next;
+                pensRemoved++;
+            }
+            day++;
+            curNode = curNode.next;
+            if(pensRemoved == numberOfPens - 1) {
+                return (int)curNode.data;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         SinglyLinkedList list = new SinglyLinkedList(
             new Node(5, new Node(10, new Node(15, new Node(7, new Node(3, new Node(27, new Node(14, new Node(1))))))))
         );
         removeValuesLargerThanMax(list, 13);
         System.out.printf("%s\n", list.toString());
+
+        System.out.printf("[%d]\n", bobsLastPen(5, 2));
     }
 }

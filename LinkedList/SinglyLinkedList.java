@@ -6,6 +6,19 @@ public class SinglyLinkedList {
 		this.head = head;
 	}
 
+	public void add(Node node) {
+		if(head == null) {
+			this.head = node;
+			return;
+		}
+		Node curNode = head;
+		while(curNode.next != null) {
+			curNode = curNode.next;
+		}
+		curNode.next = node;
+		node.next = null;
+	}
+
 	@Override
 	public String toString() {
 		if(head == null)//base case
