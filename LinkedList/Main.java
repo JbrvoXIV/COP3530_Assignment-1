@@ -42,17 +42,22 @@ public class Main {
         curNode.next = list.head; // makes linked list circular now
 
         curNode = list.head;
-        int day = 1;
+        Node prev = null;
+        int day = 0;
         int pensRemoved = 0;
         while(true) {
-            if((day + 1) % k == 0) {
-                curNode.next = curNode.next.next;
-                pensRemoved++;
-            }
             day++;
-            curNode = curNode.next;
+            if(day == k) {
+                prev.next = curNode.next;
+                pensRemoved++;
+                day = 1;
+            }
+            if(day != 0) {
+                prev = curNode;
+            }
+            curNode = prev.next;
             if(pensRemoved == numberOfPens - 1) {
-                return (int)curNode.data;
+                return (int)prev.data;
             }
         }
     }
