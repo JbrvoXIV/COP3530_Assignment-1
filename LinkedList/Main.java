@@ -29,15 +29,18 @@ public class Main {
         
         SinglyLinkedList list = new SinglyLinkedList(new Node(1));
         
-        for(int i = 2; i <= numberOfPens; i++) {
+        for(int i = 2; i <= numberOfPens; i++) { // add nodes into list in numerical order depending on numberOfPens
             list.add(new Node(i));
         }
 
         Node curNode = list.head;
-        while(curNode.next != null) {
+        while(curNode.next != null) { // move curNode to end of list
             curNode = curNode.next;
         }
-        System.out.printf("%s\n", list.toString());
+
+        if(k == 1 || numberOfPens == 1) { // return last pen in list if every day a pen is removed
+            return (int)curNode.data;
+        }
 
         curNode.next = list.head; // makes linked list circular now
 
