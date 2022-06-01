@@ -3,11 +3,11 @@ import java.util.NoSuchElementException;
 public class CAQueue {
 
     private int[] queue;
-    private int front, rear;
+    private int front, rear, size;
 
     public CAQueue(int size) {
         queue = new int[size];
-        front = rear = -1;
+        front = rear = size = -1;
     }
 
     public boolean isFull() {
@@ -18,15 +18,21 @@ public class CAQueue {
         return front == -1;
     }
 
+    public int size() {
+        return size;
+    }
+
     public void enqueue(int data) {
         if(isFull()) {
             throw new IllegalStateException();
         }
         if(isEmpty()) {
             front++;
+            size++;
         }
         rear = (rear + 1) % queue.length;
         queue[rear] = data;
+        size++;
     }
 
     public int dequeue() {
@@ -40,6 +46,7 @@ public class CAQueue {
         } else {
             front = (front + 1) % queue.length;
         }
+        size--;
         return removedData;
     }
 

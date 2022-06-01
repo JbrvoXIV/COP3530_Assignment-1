@@ -1,9 +1,13 @@
-import java.util.Stack;
 
 public class SSQueue {
 
-    private Stack<Integer> newOnTop = new Stack<>();
-    private Stack<Integer> oldOnTop = new Stack<>();
+    private MyStack newOnTop;
+    private MyStack oldOnTop;
+
+    public SSQueue(int size) {
+        newOnTop = new MyStack(size);
+        oldOnTop = new MyStack(size);
+    }
 
     public void enqueue(int data) {
         newOnTop.push(data);
